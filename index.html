@@ -154,6 +154,11 @@
           var todo = total - this.result[this.currentAward].length;
           var N = +localStorage.getItem('batchNumber') || 20;
           var batchPlayers = [];
+          // if(this.currentAward === 3){
+          //   let people = this.players.filter(val => val.name === '王安迪')
+          //   console.log('people :>> ', people);
+          //   batchPlayers.push(people[0])
+          // }
           for (var i = 0, ln = Math.min(N, todo, this.players.length); i < ln; i++) {
             var index = this.getRandomInt(0, this.players.length - 1);
             batchPlayers.push(this.players.splice(index, 1)[0]);
@@ -173,6 +178,7 @@
           localStorage.setItem('result', JSON.stringify(this.result));
           TagCanvas.Reload('myCanvas');
           this.play()
+          
         },
         onNext: function () {
           this.batchPlayers = [];
@@ -212,17 +218,17 @@
             type: 'warning',
           }).then(function () {
             vm.batchPlayers = [];
-            console.log('vm.currentAward', vm.currentAward)
+            // console.log('vm.currentAward', vm.currentAward)
             var p = vm.result.splice(vm.currentAward, 1, []);
-            console.log('p', p)
-            console.log('vm.result', vm.result)
+            // console.log('p', p)
+            // console.log('vm.result', vm.result)
             vm.players = vm.players.concat(p[0]);
             localStorage.setItem('players', JSON.stringify(vm.players))
             localStorage.setItem('result', JSON.stringify(vm.result));
           });
         },
         onKeyup: function (e) {
-          console.log(e);
+          // console.log(e);
           // 空格或回车键
           if (e.keyCode === 13 || e.keyCode === 32) {
             this.$refs.action.$el.click();
@@ -271,7 +277,12 @@
             editing: {},
           };
         });
+        // console.log('this.awards :>> ', this.awards);
+        // console.log('this.result :>> ', this.result);
+        // console.log('this.players :>> ', this.players);
+        // console.log('this.batchPlayers :>> ', this.batchPlayers);
         this.play()
+
         // console.log(this.rewards);
       },
       mounted: function () {
